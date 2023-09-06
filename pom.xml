@@ -136,7 +136,7 @@
         <jprotoc_version>1.2.2</jprotoc_version>
         <protobuf-java_version>3.22.3</protobuf-java_version>
         <grpc_version>1.54.0</grpc_version>
-        <revision>3.2.6-SNAPSHOT</revision>
+        <revision>3.2.4-test-SNAPSHOT</revision>
     </properties>
 
     <modules>
@@ -784,6 +784,32 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+
         </plugins>
 
         <pluginManagement>
@@ -857,5 +883,19 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>meituan-nexus-releases</id>
+            <name>Meituan Nexus Repository</name>
+            <url>http://pixel.sankuai.com/repository/releases/</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>meituan-nexus-snapshots</id>
+            <name>Meituan Nexus Repository</name>
+            <url>http://pixel.sankuai.com/repository/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>
